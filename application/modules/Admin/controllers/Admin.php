@@ -17,7 +17,13 @@ class Admin extends MY_controller{
     function sportoviska(){
         $this->sportoviska->display_sportoviska();
     }
-    function  addSportovisko(){
-        $this->sportoviska->pridajSportovisko();
+    function  pridajSportovisko(){
+        $this->sportoviska->pridajSportoviska();
+    }
+    function edit_sportovisko(){
+        $this->sportoviska->edit_sportovisko();
+    }
+    function delete_sportovisko(){
+        $this->sportoviska->delete_sportovisko();
     }
 }
