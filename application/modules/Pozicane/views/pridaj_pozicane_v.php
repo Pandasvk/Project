@@ -4,8 +4,10 @@
             <div class ="row">
                 <div class ="col-md-12">
                     <div class ="form-group">
-                        <label>Pouzivatelia</label>
-                        <input type="text" name ="Pouzivatelia_idPouzivatelia" class ="form-control">
+                        <label>Pouzivatel</label>
+                        <select name ="Pouzivatelia_idPouzivatelia" class ="form-control select2">
+                            <?php echo $pouzivatelia ?>
+                        </select>
                     </div>
                 </div>
                 <div class ="col-md-12">
@@ -16,8 +18,8 @@
                 </div>
                 <div class ="col-md-12">
                     <div class ="form-group">
-                        <label>cenahod</label>
-                        <input type="text" name ="cenahod" class ="form-control">
+                        <label>zaplatene</label>
+                        <input type="text" name ="zaplatene" class ="form-control">
                     </div>
                 </div>
                 <div class ="col-md-12">

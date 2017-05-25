@@ -16,7 +16,12 @@ class M_bar extends CI_Model{
     }
 
     function get_bar(){
-        $query = $this->db->get('bar');
+    $query = $this->db->get('bar');
+    return $query->result();
+
+}
+    function get_bars($id){
+        $query = $this->db->get_where('bar',array('idBar' => $id) );
         return $query->result();
 
     }

@@ -21,8 +21,8 @@
                 </div>
                 <div class ="col-md-12">
                     <div class ="form-group">
-                        <label>cenahod :</label>
-                        <?php echo $cenahod ?>
+                        <label>Zaplatene :</label>
+                        <?php echo $zaplatene ?>
                     </div>
                 </div>
                 <div class ="col-md-12">

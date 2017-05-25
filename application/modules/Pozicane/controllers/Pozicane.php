@@ -24,6 +24,7 @@ class Pozicane extends MY_Controller{
         $data['page_header'] = "Pridaj pozicane";
         $data['description'] = "Pridaj pozicane do systemu";
         $data['content_view'] = 'Pozicane/pridaj_pozicane_v';
+        $data['pouzivatelia'] = $this->create_pouzivatel_select();
         $this->template->call_template_v($data);
     }
     function post_pozicane(){
@@ -38,11 +39,12 @@ class Pozicane extends MY_Controller{
         if(count($Pozicane)>0){
             $counter =1;
             foreach ($Pozicane as $key => $value){
+                $meno =$this->create_meno_tabulka($value->Pouzivatelia_idPouzivatelia);
                 $tabulka_Pozicanych .="<tr>";
                 $tabulka_Pozicanych .="<td>[$counter]</td>";
-                $tabulka_Pozicanych .="<td>[$value->Pouzivatelia_idPouzivatelia]</td>";
+                $tabulka_Pozicanych .="<td>[$meno]</td>";
                 $tabulka_Pozicanych .="<td>[$value->Nazov]</td>";
-                $tabulka_Pozicanych .="<td>[$value->cenahod]</td>";
+                $tabulka_Pozicanych .="<td>[$value->zaplatene]</td>";
                 $tabulka_Pozicanych .="<td>[$value->kspozic]</td>";
 
                 $tabulka_Pozicanych .="<td><a href ='".base_url()."Admin/edit_pozicane/{$value->idPozicane}'>Edit</a>
@@ -61,9 +63,10 @@ class Pozicane extends MY_Controller{
         $data['page_header'] = "Edituj pozicane";
         $data['description'] = "Edituj pozicane do systemu";
         $data['content_view'] = 'Pozicane/edit_pozicane_v';
+        $data['pouzivatelia'] = $this->create_pouzivatel_select();
         $data['Pouzivatelia_idPouzivatelia']=$pozicane['0']->Pouzivatelia_idPouzivatelia;
         $data['Nazov']=$pozicane['0']->Nazov;
-        $data['cenahod']=$pozicane['0']->cenahod;
+        $data['zaplatene']=$pozicane['0']->zaplatene;
         $data['kspozic']=$pozicane['0']->kspozic;
         $data['id']=$id;
         $this->template->call_template_v($data);
@@ -71,7 +74,7 @@ class Pozicane extends MY_Controller{
 
     function post_edit_pozicane(){
         $id = $this->input->post('ID');
-        $data = array('Pouzivatelia_idPouzivatelia' => $this->input->post('Pouzivatelia_idPouzivatelia'), 'cenahod'=> $this->input->post('cenahod'), 'Nazov'=> $this->input->post('Nazov'),
+        $data = array('Pouzivatelia_idPouzivatelia' => $this->input->post('Pouzivatelia_idPouzivatelia'), 'zaplatene'=> $this->input->post('zaplatene'), 'Nazov'=> $this->input->post('Nazov'),
             'kspozic'=> $this->input->post('kspozic'), );
         $this->M_Pozicane->update_Pozicane($id,$data);
         redirect(base_url() . "Admin/Pozicane");
@@ -85,7 +88,7 @@ class Pozicane extends MY_Controller{
         $data['content_view'] = 'Pozicane/delete_pozicane_v';
         $data['Pouzivatelia_idPouzivatelia']=$pozicane['0']->Pouzivatelia_idPouzivatelia;
         $data['Nazov']=$pozicane['0']->Nazov;
-        $data['cenahod']=$pozicane['0']->cenahod;
+        $data['zaplatene']=$pozicane['0']->zaplatene;
         $data['kspozic']=$pozicane['0']->kspozic;
         $data['id']=$id;
         $this->template->call_template_v($data);
@@ -94,5 +97,22 @@ class Pozicane extends MY_Controller{
         $id = $this->input->post('ID');
         $this->M_Pozicane->delete_pozicane($id);
         redirect(base_url() . "Admin/Pozicane");
+    }
+    function create_pouzivatel_select(){
+        $this->load->model('Pouzivatelia/M_pouzivatelia');
+        $pouzivatel = $this->M_pouzivatelia->get_pouzivatelia();
+        $options ="";
+        if(count($pouzivatel)){
+            foreach ($pouzivatel as $key => $value){
+                $options .="<option value ='{$value->idPouzivatelia}'>{$value->meno}{$value->priezvisko}</option>";
+            }
+        }
+        return $options;
+    }
+    function create_meno_tabulka($id){
+        $this->load->model('Pouzivatelia/M_pouzivatelia');
+        $pouzivatel = $this->M_pouzivatelia->get_pouzivatela($id);
+        $meno = $pouzivatel['0']->meno;
+        return $meno;
     }
 }

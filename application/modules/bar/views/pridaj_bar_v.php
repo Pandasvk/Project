@@ -11,7 +11,9 @@
                 <div class ="col-md-12">
                     <div class ="form-group">
                         <label>Lokacia baru</label>
-                        <input type="text" name ="Lokacia" class ="form-control">
+                        <select name ="Lokacia"  class ="form-control select2">
+                            <?php echo $sportoviska ?>
+                        </select>
                     </div>
                 </div>
                 <div class ="col-md-12">

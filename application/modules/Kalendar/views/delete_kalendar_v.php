@@ -27,20 +27,8 @@
                 </div>
                 <div class ="col-md-12">
                     <div class ="form-group">
-                        <label>Cenahod :</label>
-                        <?php echo $cenahod ?>
-                    </div>
-                </div>
-                <div class ="col-md-12">
-                    <div class ="form-group">
-                        <label>Hodin :</label>
-                        <?php echo $hodin ?>
-                    </div>
-                </div>
-                <div class ="col-md-12">
-                    <div class ="form-group">
-                        <label>Zlava :</label>
-                        <?php echo $zlava ?>
+                        <label>Zaplatene :</label>
+                        <?php echo $zaplatene ?>
                     </div>
                 </div>
 

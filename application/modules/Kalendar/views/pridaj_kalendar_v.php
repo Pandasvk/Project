@@ -11,33 +11,28 @@
                 <div class ="col-md-12">
                     <div class ="form-group">
                         <label>Sportovisko</label>
-                        <input type="text" name ="Sportoviska_idSportoviska" class ="form-control">
+                        <select name ="Sportoviska_idSportoviska" class ="form-control select2">
+                            <?php echo $sportoviska ?>
+                        </select>
                     </div>
                 </div>
+
                 <div class ="col-md-12">
                     <div class ="form-group">
                         <label>Pouzivatel</label>
-                        <input type="text" name ="Pouzivatelia_idPouzivatelia" class ="form-control">
+                        <select name ="Pouzivatelia_idPouzivatelia" class ="form-control select2">
+                    <?php echo $pouzivatelia ?>
+                        </select>
                     </div>
                 </div>
+
                 <div class ="col-md-12">
                     <div class ="form-group">
-                        <label>Cenahod</label>
-                        <input type="text" name ="cenahod" class ="form-control">
+                        <label>Zaplatene</label>
+                        <input type="text" name ="zaplatene" class ="form-control">
                     </div>
                 </div>
-                <div class ="col-md-12">
-                    <div class ="form-group">
-                        <label>hodin</label>
-                        <input type="text" name ="hodin" class ="form-control">
-                    </div>
-                </div>
-                <div class ="col-md-12">
-                    <div class ="form-group">
-                        <label>Zlava</label>
-                        <input type="text" name ="zlava" class ="form-control">
-                    </div>
-                </div>
+
 
 
                 <div class ="col-md-12">

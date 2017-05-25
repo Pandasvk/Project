@@ -36,8 +36,9 @@ class Sportoviska extends MY_Controller{
         $tabulka_sportovisk ="";
 
         if(count($sportoviska)>0){
-            $counter =1;
+            $counter =0;
             foreach ($sportoviska as $key => $value){
+                $counter =$counter + 1;
                 $tabulka_sportovisk .="<tr>";
                 $tabulka_sportovisk .="<td>[$counter]</td>";
                 $tabulka_sportovisk .="<td>[$value->nazov]</td>";

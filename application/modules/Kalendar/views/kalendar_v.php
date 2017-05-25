@@ -6,8 +6,10 @@
         <table class ="table table-stripped table-bordered">
             <thead>
             <th>#</th>
-            <th>Nazov Kalendar</th>
-            <th>Popis</th>
+            <th>Dattum</th>
+            <th>Sportovisko</th>
+            <th>pouzivatel</th>
+            <th>zaplatene</th>
             </thead>
             <tbody>
             <?php if($tabulka_Kalendarov !==""){

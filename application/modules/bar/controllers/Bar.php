@@ -24,6 +24,7 @@ class bar extends MY_Controller{
         $data['page_header'] = "Pridaj Bar";
         $data['description'] = "Pridaj Bar do systemu";
         $data['content_view'] = 'bar/pridaj_Bar_v';
+        $data['sportoviska'] =$this->create_sportoviska_select();
         $this->template->call_template_v($data);
     }
     function post_bar(){
@@ -36,12 +37,14 @@ class bar extends MY_Controller{
         $tabulka_barov ="";
 
         if(count($bar)>0){
-            $counter =1;
+            $counter =0;
             foreach ($bar as $key => $value){
+                $counter =$counter + 1;
+                $sportovisko=$this->create_sportovisko_tabulka($value->Lokacia);
                 $tabulka_barov .="<tr>";
                 $tabulka_barov .="<td>[$counter]</td>";
                 $tabulka_barov .="<td>[$value->Nazov]</td>";
-                $tabulka_barov .="<td>[$value->Lokacia]</td>";
+                $tabulka_barov .="<td>[$sportovisko]</td>";
                 $tabulka_barov .="<td>[$value->Popis]</td>";
                 $tabulka_barov .="<td><a href ='".base_url()."Admin/edit_bar/{$value->idBar}'>Edit</a>
                 |
@@ -55,13 +58,14 @@ class bar extends MY_Controller{
 
     function edit_bar(){
         $id =  $this->uri->segment(3);
-        $bar = $this->M_bar->get_bar($id);
+        $bar = $this->M_bar->get_bars($id);
         $data['page_header'] = "Edituj bar";
         $data['description'] = "Edituj bar do systemu";
         $data['content_view'] = 'bar/edit_bar_v';
         $data['nazov']=$bar['0']->Nazov;
         $data['lokacia']=$bar['0']->Lokacia;
         $data['popis']=$bar['0']->Popis;
+        $data['sportoviska'] =$this->create_sportoviska_select();
         $data['id']=$id;
         $this->template->call_template_v($data);
     }
@@ -89,5 +93,23 @@ class bar extends MY_Controller{
         $id = $this->input->post('ID');
         $this->M_bar->delete_bar($id);
         redirect(base_url() . "Admin/bar");
+    }
+    function create_sportoviska_select(){
+        $this->load->model('Sportoviska/M_sportoviska');
+        $sportoviska = $this->M_sportoviska->get_sportoviska();
+        $options ="";
+        if(count($sportoviska)){
+            foreach ($sportoviska as $key => $value){
+                $options .="<option value ='{$value->idSportoviska}'>{$value->nazov}</option>";
+            }
+        }
+        return $options;
+    }
+
+    function create_sportovisko_tabulka($id){
+    $this->load->model('Sportoviska/M_sportoviska');
+    $sportovisko = $this->M_sportoviska->get_sportovisko($id);
+    $nazov = $sportovisko['0']->nazov;
+    return $nazov;
     }
 }

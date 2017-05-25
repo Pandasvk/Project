@@ -36,8 +36,9 @@ class Pouzivatelia extends MY_Controller{
         $tabulka_Pouzivatelov ="";
 
         if(count($Pouzivatelia)>0){
-            $counter =1;
+            $counter =0;
             foreach ($Pouzivatelia as $key => $value){
+                $counter =$counter + 1;
                 $tabulka_Pouzivatelov .="<tr>";
                 $tabulka_Pouzivatelov .="<td>[$counter]</td>";
                 $tabulka_Pouzivatelov .="<td>[$value->meno]</td>";
