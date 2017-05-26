@@ -18,7 +18,7 @@ class Home extends MY_Controller{
         $data['description'] = "Home";
         $data['content_view'] = 'Home/home_v';
         $data['tabulka_ponuka'] = $this->tabulka_ponuka();
-        $this->template->call_template_user_v($data);
+        $this->template->call_template_v($data);
     }
     function tabulka_ponuka(){
        
