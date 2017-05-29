@@ -34,4 +34,22 @@ class M_Kalendar extends CI_Model{
         $this->db->delete('kalendar');
     }
 
+    function get_data_graf1(){
+       $query =$this->db->query("SELECT count(Pouzivatelia_idPouzivatelia) as navstevnost,s.nazov FROM kalendar  k
+inner join sportoviskas s ON k.Sportoviska_idSportoviska=s.idSportoviska
+GROUP by Sportoviska_idSportoviska");
+        return $query->result();
+    }
+
+    /*Kalendar kto chodi kolko sportovat */
+    function get_data_graf3(){
+        $query =$this->db->query("SELECT count(idKalendar) as pocet,p.meno FROM kalendar k INNER JOIN pouzivatelia p on k.Pouzivatelia_idPouzivatelia=p.idPouzivatelia GROUP by p.meno");
+        return $query->result();
+    }
+    /*Kto k nam berie najviac priatelov */
+    function get_data_graf4(){
+        $query =$this->db->query("SELECT Sum(zaplatene) as suma,p.meno FROM kalendar k INNER JOIN pouzivatelia p on k.Pouzivatelia_idPouzivatelia=p.idPouzivatelia GROUP by p.meno");
+        return $query->result();
+    }
+
 }

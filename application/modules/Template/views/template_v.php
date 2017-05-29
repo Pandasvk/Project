@@ -229,11 +229,12 @@ desired effect
             <ul class="sidebar-menu">
                 <li class="header">Rezervuj teraz</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li><a href="<?php base_url(); ?>sportoviska"><i class="fa fa-soccer-ball-o"></i> <span>Sportoviska</span></a></li>
-                <li><a href="<?php base_url(); ?>Pouzivatelia"><i class="fa fa-phone"></i> <span>Pouzivatelia</span></a></li>
-                <li><a href="<?php base_url(); ?>Pozicane"><i class="fa fa-info"></i> <span>Pozicane</span></a></li>
-                <li><a href="<?php base_url(); ?>Kalendar"><i class="fa fa-calendar"></i> <span>Kalendar</span></a></li>
-                <li><a href="<?php base_url(); ?>bar"><i class="fa fa-calendar"></i> <span>Bar</span></a></li>
+                <li><a href="<?php echo base_url(); ?>Home/call_home"><i class="fa fa-soccer-ball-o"></i> <span>Home</span></a></li>
+                <li><a href="<?php echo base_url(); ?>Admin/sportoviska"><i class="fa fa-soccer-ball-o"></i> <span>Sportoviska</span></a></li>
+                <li><a href="<?php echo base_url(); ?>Admin/Pouzivatelia"><i class="fa fa-phone"></i> <span>Pouzivatelia</span></a></li>
+                <li><a href="<?php echo base_url(); ?>Admin/Pozicane"><i class="fa fa-info"></i> <span>Pozicane</span></a></li>
+                <li><a href="<?php echo base_url(); ?>Admin/Kalendar"><i class="fa fa-calendar"></i> <span>Kalendar</span></a></li>
+                <li><a href="<?php echo base_url(); ?>Admin/bar"><i class="fa fa-calendar"></i> <span>Bar</span></a></li>
 
 
             </ul>

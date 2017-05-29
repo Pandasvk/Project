@@ -137,4 +137,6 @@ class Kalendar extends MY_Controller{
         $nazov = $sportovisko['0']->nazov;
         return $nazov;
     }
+
+
 }

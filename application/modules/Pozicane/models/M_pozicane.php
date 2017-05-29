@@ -34,4 +34,10 @@ class M_pozicane extends CI_Model{
         $this->db->delete('pozicane');
     }
 
+    function get_data_graf2(){
+        $query =$this->db->query("SELECT count(idPozicane) as pocet ,po.meno FROM pozicane p
+        INNER JOIN pouzivatelia po ON p.Pouzivatelia_idPouzivatelia=po.idPouzivatelia
+        GROUP by po.meno");
+        return $query->result();
+    }
 }
