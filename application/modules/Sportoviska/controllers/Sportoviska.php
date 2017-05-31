@@ -32,12 +32,19 @@ class Sportoviska extends MY_Controller{
         }
 
     function tabulka_sportoviska(){
-        $sportoviska = $this->M_sportoviska->get_sportoviska();
         $tabulka_sportovisk ="";
+        $this->load->library('pagination');
+        $pocet = $this->M_sportoviska->get_sportoviska();
+        $config['base_url'] = base_url()."/Admin/sportoviska";
+        $config['total_rows'] = count($pocet);
+        $config['per_page'] = 3;
+
+        $this->pagination->initialize($config);
+        $sportoviska = $this->db->get('sportoviskas', $config['per_page'],$this->uri->segment(3));
 
         if(count($sportoviska)>0){
-            $counter =0;
-            foreach ($sportoviska as $key => $value){
+            $counter =$this->uri->segment(3);
+            foreach ($sportoviska->result() as $key => $value){
                 $counter =$counter + 1;
                 $tabulka_sportovisk .="<tr>";
                 $tabulka_sportovisk .="<td>[$counter]</td>";

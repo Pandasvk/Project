@@ -34,12 +34,19 @@ class Kalendar extends MY_Controller{
     }
 
     function tabulka_Kalendarov(){
-        $Kalendar = $this->M_Kalendar->get_Kalendare();
         $tabulka_Kalendarov ="";
+        $this->load->library('pagination');
+        $pocet = $this->M_Kalendar->get_kalendare();
+        $config['base_url'] = base_url()."/Admin/Kalendar";
+        $config['total_rows'] = count($pocet);
+        $config['per_page'] = 3;
 
+        $this->pagination->initialize($config);
+        $Kalendar = $this->db->get('kalendar', $config['per_page'],$this->uri->segment(3));
         if(count($Kalendar)>0){
-            $counter =1;
-            foreach ($Kalendar as $key => $value){
+            $counter =$this->uri->segment(3);
+            foreach ($Kalendar->result() as $key => $value){
+                $counter = $counter +1;
                 $meno =$this->create_meno_tabulka($value->Pouzivatelia_idPouzivatelia);
                 $sportovisko=$this->create_sportovisko_tabulka($value->Sportoviska_idSportoviska);
                 $tabulka_Kalendarov .="<tr>";
@@ -137,6 +144,7 @@ class Kalendar extends MY_Controller{
         $nazov = $sportovisko['0']->nazov;
         return $nazov;
     }
+
 
 
 }

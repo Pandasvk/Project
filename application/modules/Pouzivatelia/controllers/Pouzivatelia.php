@@ -32,12 +32,20 @@ class Pouzivatelia extends MY_Controller{
     }
 
     function tabulka_Pouzivatelia(){
-        $Pouzivatelia = $this->M_Pouzivatelia->get_Pouzivatelia();
         $tabulka_Pouzivatelov ="";
 
+        $this->load->library('pagination');
+        $pocet = $this->M_Pouzivatelia->get_pouzivatelia();
+        $config['base_url'] = base_url()."/Admin/Pouzivatelia";
+        $config['total_rows'] = count($pocet);
+        $config['per_page'] = 3;
+
+        $this->pagination->initialize($config);
+        $Pouzivatelia = $this->db->get('pouzivatelia', $config['per_page'],$this->uri->segment(3));
+
         if(count($Pouzivatelia)>0){
-            $counter =0;
-            foreach ($Pouzivatelia as $key => $value){
+            $counter =$this->uri->segment(3);
+            foreach ($Pouzivatelia->result() as $key => $value){
                 $counter =$counter + 1;
                 $tabulka_Pouzivatelov .="<tr>";
                 $tabulka_Pouzivatelov .="<td>[$counter]</td>";

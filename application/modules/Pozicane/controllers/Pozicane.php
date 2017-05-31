@@ -33,12 +33,20 @@ class Pozicane extends MY_Controller{
     }
 
     function tabulka_Pozicane(){
-        $Pozicane = $this->M_Pozicane->get_Pozicane();
         $tabulka_Pozicanych ="";
+        $this->load->library('pagination');
+        $pocet = $this->M_Pozicane->get_pozicane();
+        $config['base_url'] = base_url()."/Admin/Pozicane";
+        $config['total_rows'] = count($pocet);
+        $config['per_page'] = 3;
+
+        $this->pagination->initialize($config);
+        $Pozicane = $this->db->get('pozicane', $config['per_page'],$this->uri->segment(3));
 
         if(count($Pozicane)>0){
-            $counter =1;
-            foreach ($Pozicane as $key => $value){
+            $counter =$this->uri->segment(3);
+            foreach ($Pozicane->result() as $key => $value){
+                $counter = $counter +1;
                 $meno =$this->create_meno_tabulka($value->Pouzivatelia_idPouzivatelia);
                 $tabulka_Pozicanych .="<tr>";
                 $tabulka_Pozicanych .="<td>[$counter]</td>";

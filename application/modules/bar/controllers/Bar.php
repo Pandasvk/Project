@@ -33,12 +33,20 @@ class bar extends MY_Controller{
     }
 
     function tabulka_barov(){
-        $bar = $this->M_bar->get_bar();
+
         $tabulka_barov ="";
+        $this->load->library('pagination');
+        $pocet = $this->M_bar->get_bar();
+        $config['base_url'] = base_url()."/Admin/bar";
+        $config['total_rows'] = count($pocet);
+        $config['per_page'] = 3;
+
+        $this->pagination->initialize($config);
+        $bar = $this->db->get('bar', $config['per_page'],$this->uri->segment(3));
 
         if(count($bar)>0){
-            $counter =0;
-            foreach ($bar as $key => $value){
+            $counter =$this->uri->segment(3);
+            foreach ($bar->result() as $key => $value){
                 $counter =$counter + 1;
                 $sportovisko=$this->create_sportovisko_tabulka($value->Lokacia);
                 $tabulka_barov .="<tr>";
